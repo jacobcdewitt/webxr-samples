@@ -582,10 +582,10 @@ function perspective(out, fovy, aspect, near, far) {
   return out;
 }
 
-var PRIVATE$3 = Symbol('@@webxr-polyfill/XRDevicePose');
-var XRDevicePose = function () {
-  function XRDevicePose(polyfill) {
-    classCallCheck(this, XRDevicePose);
+var PRIVATE$3 = Symbol('@@webxr-polyfill/XRViewerPose');
+var XRViewerPose = function () {
+  function XRViewerPose(polyfill) {
+    classCallCheck(this, XRViewerPose);
     this[PRIVATE$3] = {
       polyfill: polyfill,
       leftViewMatrix: identity(new Float32Array(16)),
@@ -593,7 +593,7 @@ var XRDevicePose = function () {
       poseModelMatrix: identity(new Float32Array(16))
     };
   }
-  createClass(XRDevicePose, [{
+  createClass(XRViewerPose, [{
     key: 'getViewMatrix',
     value: function getViewMatrix(view) {
       switch (view.eye) {
@@ -624,7 +624,7 @@ var XRDevicePose = function () {
       return this[PRIVATE$3].poseModelMatrix;
     }
   }]);
-  return XRDevicePose;
+  return XRViewerPose;
 }();
 
 var PRIVATE$4 = Symbol('@@webxr-polyfill/XRViewport');
@@ -702,7 +702,7 @@ var PRIVATE$6 = Symbol('@@webxr-polyfill/XRFrame');
 var XRFrame = function () {
   function XRFrame(polyfill, session, sessionId) {
     classCallCheck(this, XRFrame);
-    var devicePose = new XRDevicePose(polyfill);
+    var devicePose = new XRViewerPose(polyfill);
     var views = [new XRView(polyfill, 'left', sessionId)];
     if (session.immersive) {
       views.push(new XRView(polyfill, 'right', sessionId));
@@ -715,8 +715,8 @@ var XRFrame = function () {
     };
   }
   createClass(XRFrame, [{
-    key: 'getDevicePose',
-    value: function getDevicePose(coordinateSystem) {
+    key: 'getViewerPose',
+    value: function getViewerPose(coordinateSystem) {
       this[PRIVATE$6].devicePose.updateFromFrameOfReference(coordinateSystem);
       return this[PRIVATE$6].devicePose;
     }
@@ -1469,7 +1469,7 @@ var API = {
   XRFrame: XRFrame,
   XRView: XRView,
   XRViewport: XRViewport,
-  XRDevicePose: XRDevicePose,
+  XRViewerPose: XRViewerPose,
   XRLayer: XRLayer,
   XRWebGLLayer: XRWebGLLayer,
   XRPresentationContext: XRPresentationContext,
