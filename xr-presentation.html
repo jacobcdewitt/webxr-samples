@@ -204,7 +204,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
           // Loop through each of the views reported by the frame and draw them
           // into the corresponding viewport.
-          for (let view of frame.views) {
+          for (let view of pose.views) {
             let viewport = session.baseLayer.getViewport(view);
             gl.viewport(viewport.x, viewport.y,
                         viewport.width, viewport.height);
@@ -216,7 +216,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             // projection and view matricies from the current view and pose.
             // We bound the framebuffer and viewport up above, and are passing
             // in the appropriate matrices here to be used when rendering.
-            scene.draw(view.projectionMatrix, pose.getViewMatrix(view));
+            scene.draw(view.projectionMatrix, view.viewMatrix);
           }
         } else {
           // There's several options for handling cases where no pose is given.

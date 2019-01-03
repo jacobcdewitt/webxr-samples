@@ -198,10 +198,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
         if (pose) {
           let views = [];
-          for (let view of frame.views) {
+          for (let view of pose.views) {
             let renderView = new WebXRView();
             renderView.projectionMatrix = view.projectionMatrix;
-            renderView.viewMatrix = pose.getViewMatrix(view);
+            renderView.viewMatrix = view.viewMatrix;
             renderView.viewport = session.baseLayer.getViewport(view);
 
             // It's important to take into account which eye the view is
