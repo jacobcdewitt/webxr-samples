@@ -239,7 +239,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
           // more efficient pattern anyway as a way of promoting best practices.
 
           let views = [];
-          for (let view of frame.views) {
+          for (let view of pose.views) {
             // Gather all the values needed for one view and push it into the
             // array of views to be drawn. WebXRView is a utility class that
             // holds all the necessary values for drawing a single view.
@@ -249,7 +249,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             // scene.drawXRViews() function, which handles gathering these
             // values internally.
             renderView.projectionMatrix = view.projectionMatrix;
-            renderView.viewMatrix = pose.getViewMatrix(view);
+            renderView.viewMatrix = view.viewMatrix;
             renderView.viewport = session.baseLayer.getViewport(view);
             views.push(renderView);
           }
